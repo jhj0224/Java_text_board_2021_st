@@ -42,7 +42,15 @@ public class App {
 				
 			}
 			
-			if (command.equals("/usr/system/exit")) {
+			else if (command.equals("/usr/article/list")) {
+				System.out.printf("번호 / 작성날짜 / 제목\n");
+				
+				for (Article article : articles) {
+					System.out.printf("%d / %s / %s\n", article.id , article.regDate , article.title);
+				}
+			}
+			
+			else if (command.equals("/usr/system/exit")) {
 				System.out.println("프로그램을 종료합니다.");
 				break;
 			}
