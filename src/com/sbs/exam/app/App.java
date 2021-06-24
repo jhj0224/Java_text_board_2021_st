@@ -46,7 +46,8 @@ public class App {
 			else if (command.equals("/usr/article/list")) {
 				System.out.printf("번호 / 작성날짜 / 제목\n");
 				
-				for (Article article : articles) {
+				for ( int i = articles.size() - 1; i >= 0; i--) {
+					Article article = articles.get(i);
 					System.out.printf("%d / %s / %s\n", article.id , article.regDate , article.title);
 				}
 			}
