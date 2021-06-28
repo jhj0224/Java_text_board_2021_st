@@ -3,6 +3,9 @@ package com.sbs.exam.app;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sbs.exam.app.Session.Session;
+import com.sbs.exam.app.container.Container;
+
 public class Rq {
 	private Map<String, String> params;
 	private String command;
@@ -64,6 +67,16 @@ public class Rq {
 
 	public String getControllerTypeCode() {
 		return controllerTypeName;
+	}
+
+	public void setSessionAttr(String key, Object value) {
+		Session session = Container.getSession();
+
+		session.setAttribute(key, value);
+	}
+
+	public Object getControllerName() {
+		return controllerName;
 	}
 
 }

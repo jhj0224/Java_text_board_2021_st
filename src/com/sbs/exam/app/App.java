@@ -1,13 +1,12 @@
 package com.sbs.exam.app;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+import com.sbs.exam.app.Session.Session;
 import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.controller.UsrArticleController;
-import com.sbs.exam.app.dto.Article;
-import com.sbs.exam.util.Util;
+import com.sbs.exam.app.controller.UsrMemberController;
+import com.sbs.exam.app.dto.Member;
 
 public class App {	
 	Scanner sc;
@@ -20,9 +19,19 @@ public class App {
 		System.out.println("== 텍스트 게시판 시작 ==");		 	 
 
 		UsrArticleController usrArticleController = new UsrArticleController();
+		UsrMemberController usrMemberController = new UsrMemberController();
+		Session session = Container.getSession();
 				
 		while (true) {
-			System.out.printf("명령어) ");
+			Member loginedMember = (Member) session.getAttribute("loginedMember");
+
+			String promprName = "명령어";
+
+			if (loginedMember != null) {
+				promprName = loginedMember.nickname;
+			}
+
+			System.out.printf("%s) ", promprName);
 
 			String command = sc.nextLine().trim();
 
@@ -34,15 +43,19 @@ public class App {
 			}
 			
 			if (rq.getControllerTypeCode().equals("usr")) {
-				usrArticleController.performAction(rq);
-			}	
-			else if (rq.getActionPath().equals("/usr/system/exit")) {
-				System.out.println("프로그램을 종료 합니다.");
-				break;
-			}
+				if (rq.getControllerName().equals("article")) {
+					usrArticleController.performAction(rq);
+				} else if (rq.getControllerName().equals("member")) {
+					usrMemberController.performAction(rq);
+				} else if (rq.getControllerName().equals("system")) {
+					if (rq.getActionPath().equals("/usr/system/exit")) {
+						System.out.println("프로그램을 종료 합니다.");
+						break;
+					}
+				}
 		}
 
 		System.out.println("== 텍스트 게시판 끝 ==");
-	}	
-
+	}
+	}
 }
