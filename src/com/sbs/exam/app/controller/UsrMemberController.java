@@ -9,7 +9,7 @@ import com.sbs.exam.app.container.Container;
 import com.sbs.exam.app.dto.Member;
 import com.sbs.exam.util.Util;
 
-public class UsrMemberController {
+public class UsrMemberController extends Controller {
 	private List<Member> members;
 	private int membersLastId;
 	private Scanner sc;
@@ -48,6 +48,7 @@ public class UsrMemberController {
 		return null;
 	}
 
+	@Override
 	public void performAction(Rq rq) {
 		if (rq.getActionPath().equals("/usr/member/login")) {
 			actionLogin(rq);
@@ -57,7 +58,7 @@ public class UsrMemberController {
 	}
 
 	private void actionLogout(Rq rq) {
-		rq.removeSessionAttr("loginedMember");
+		rq.logout();
 	}
 
 	private void actionLogin(Rq rq) {
@@ -89,7 +90,7 @@ public class UsrMemberController {
 			return;
 		}
 
-		rq.setSessionAttr("loginedMember", member);
+		rq.login(member);
 
 		System.out.printf("%s님 환영합니다.\n", member.getNickname());
 	}
