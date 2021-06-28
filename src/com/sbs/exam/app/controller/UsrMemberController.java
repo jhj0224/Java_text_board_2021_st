@@ -57,7 +57,7 @@ public class UsrMemberController {
 	}
 
 	private void actionLogout(Rq rq) {
-		
+		rq.removeSessionAttr("loginedMember");
 	}
 
 	private void actionLogin(Rq rq) {

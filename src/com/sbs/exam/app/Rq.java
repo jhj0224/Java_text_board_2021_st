@@ -79,4 +79,11 @@ public class Rq {
 		return controllerName;
 	}
 
+	public void removeSessionAttr(String key) {
+		Session session = Container.getSession();
+
+		session.removeAttribute(key);
+		
+	}
+
 }
