@@ -15,12 +15,12 @@ public class ArticleRepository {
 		lastId = 0;
 	}
 
-	public int write(int BoardId, int MemberId, String title, String body) {
+	public int write(int boardId, int memberId, String title, String body) {
 		int id = lastId + 1;
 		String regDate = Util.getNowDateStr();
 		String updateDate = regDate;
 
-		Article article = new Article(id, regDate, updateDate, BoardId, MemberId, title, body);
+		Article article = new Article(id, regDate, updateDate, boardId, memberId, title, body);
 		articles.add(article);
 
 		lastId = id;
@@ -31,14 +31,14 @@ public class ArticleRepository {
 	public void deleteArticleById(int id) {
 		Article article = getArticleById(id);
 
-		if ( article != null ) {
+		if (article != null) {
 			articles.remove(article);
 		}
 	}
 
 	public Article getArticleById(int id) {
-		for ( Article article : articles ) {
-			if ( article.getId() == id ) {
+		for (Article article : articles) {
+			if (article.getId() == id) {
 				return article;
 			}
 		}
@@ -46,8 +46,20 @@ public class ArticleRepository {
 		return null;
 	}
 
-	public List<Article> getArticles() {
-		return articles;
+	public List<Article> getArticles(int boardId) {
+		if (boardId == 0) {
+			return articles;
+		}
+
+		List<Article> filteredArticles = new ArrayList<>();
+
+		for (Article article : articles) {
+			if (article.getBoardId() == boardId) {
+				filteredArticles.add(article);
+			}
+		}
+		
+		return filteredArticles;
 	}
 
 }
