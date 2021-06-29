@@ -18,9 +18,15 @@ public class App {
 		sc = Container.getSc();
 	}
 
+	private void forTestLoginByMemberId(int id) {		
+		Member member = Container.getMemberService().getMemberById(id);
+	}
+	
 	public void run() {
 		System.out.println("== 텍스트 게시판 시작 ==");
 
+		forTestLoginByMemberId(1);
+		
 		while (true) {
 			String promprName = "명령어";
 
@@ -57,6 +63,8 @@ public class App {
 
 		System.out.println("== 텍스트 게시판 끝 ==");
 	}
+
+	
 
 	/**
 	 * @param rq

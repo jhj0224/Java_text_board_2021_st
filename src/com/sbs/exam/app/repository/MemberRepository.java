@@ -15,7 +15,7 @@ public class MemberRepository {
 		members = new ArrayList<>();
 		lastId = 0;
 	}
-	
+
 	public int join(String loginId, String loginPw, String name, String nickname) {
 		int id = lastId + 1;
 		String regDate = Util.getNowDateStr();
@@ -30,12 +30,23 @@ public class MemberRepository {
 	}
 
 	public Member getMemberByLoginId(String loginId) {
-		for ( Member member : members ) {
-			if ( member.getLoginId().equals(loginId) ) {
+		for (Member member : members) {
+			if (member.getLoginId().equals(loginId)) {
 				return member;
 			}
 		}
 
 		return null;
 	}
+
+	public Member getMemberById(int id) {
+		for (Member member : members) {
+			if (member.getId() == id) {
+				return member;
+			}
+		}
+
+		return null;
+	}
+
 }
