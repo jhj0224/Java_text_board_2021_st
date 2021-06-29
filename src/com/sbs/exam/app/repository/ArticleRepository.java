@@ -15,12 +15,12 @@ public class ArticleRepository {
 		lastId = 0;
 	}
 
-	public int write(int BoardId, String title, String body) {
+	public int write(int BoardId, int MemberId, String title, String body) {
 		int id = lastId + 1;
 		String regDate = Util.getNowDateStr();
 		String updateDate = regDate;
 
-		Article article = new Article(id, regDate, updateDate, BoardId, title, body);
+		Article article = new Article(id, regDate, updateDate, BoardId, MemberId, title, body);
 		articles.add(article);
 
 		lastId = id;
