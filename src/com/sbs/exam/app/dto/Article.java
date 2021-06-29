@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Article extends Object {	
+public class Article {	
 	private int id;
 	private String regDate;
 	private String updateDate;
+	private int BoardId;
 	private String title;
 	private String body;			
 }
